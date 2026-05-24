@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs — Neerazhi</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .docs-layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; max-width: 1100px; margin: 0 auto; min-height: calc(100vh - 56px); }
+    @media (max-width: 700px) { .docs-layout { grid-template-columns: 1fr; } }
+    .docs-nav { border-right: 1px solid var(--border); padding: 2rem 1.5rem; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+    @media (max-width: 700px) { .docs-nav { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; } }
+    .docs-nav h3 { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; margin-top: 1.5rem; }
+    .docs-nav h3:first-child { margin-top: 0; }
+    .docs-nav a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; margin-bottom: 2px; transition: all 0.15s; }
+    .docs-nav a:hover { color: var(--text); background: var(--bg2); }
+    .docs-content { padding: 2.5rem 2.5rem; max-width: 720px; }
+    .docs-content h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .docs-content h2 { font-size: 1.3rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .docs-content h3 { font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); }
+    .docs-content p { color: var(--muted); margin-bottom: 1rem; line-height: 1.75; }
+    .docs-content code {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 13px;
+      font-family: 'Cascadia Code', 'Fira Mono', monospace;
+      color: var(--accent);
+    }
+    .docs-content pre {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .docs-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .docs-content ul, .docs-content ol { color: var(--muted); margin: 0.5rem 0 1rem 1.5rem; line-height: 2; }
+    .docs-content li code { font-size: 12px; }
+    .alert-box {
+      background: rgba(34,211,238,0.06);
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 1rem 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .alert-box strong { color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
+    th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-weight: 600; }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    td code { font-size: 12px; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Neerazhi</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/docs" class="active">Docs</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+
+<div class="docs-layout">
+  <aside class="docs-nav">
+    <h3>Getting started</h3>
+    <a href="#install">Installation</a>
+    <a href="#env">Environment setup</a>
+    <a href="#run">Running locally</a>
+    <h3>Architecture</h3>
+    <a href="#structure">File structure</a>
+    <a href="#server">Backend (server)</a>
+    <a href="#ws">WebSocket events</a>
+    <h3>API reference</h3>
+    <a href="#api-sensors">GET /api/sensors</a>
+    <a href="#api-analyse">POST /api/analyse</a>
+    <a href="#api-history">GET /api/history</a>
+    <h3>Sensor integration</h3>
+    <a href="#sim">Simulator mode</a>
+    <a href="#mqtt">MQTT real sensors</a>
+    <a href="#payload">MQTT payload format</a>
+    <h3>Deployment</h3>
+    <a href="#deploy">Deploy to Railway</a>
+    <a href="#vps">VPS with nginx</a>
+  </aside>
+
+  <main class="docs-content">
+    <h1>Neerazhi docs</h1>
+    <p>Everything you need to install, run, and extend the Neerazhi smart drainage system.</p>
+
+    <div class="alert-box"><strong>Requirements:</strong> Node.js 18+, npm 9+. An Anthropic API key for AI analysis. An MQTT broker only if using real sensors.</div>
+
+    <h2 id="install">Installation</h2>
+    <p>Clone or download the project, then install dependencies:</p>
+    <pre><code>git clone https://github.com/yourname/neerazhi.git
+cd neerazhi
+npm install</code></pre>
+
+    <h2 id="env">Environment setup</h2>
+    <p>Copy the example env file and fill in your values:</p>
+    <pre><code>cp .env.example .env</code></pre>
+    <p>Edit <code>.env</code>:</p>
+    <pre><code>ANTHROPIC_API_KEY=sk-ant-...
+PORT=3000
+MQTT_BROKER=mqtt://localhost:1883
+MQTT_TOPIC=neerazhi/sensors/#</code></pre>
+    <p><code>MQTT_BROKER</code> and <code>MQTT_TOPIC</code> are only required when using real sensors. In simulator mode they are ignored.</p>
+
+    <h2 id="run">Running locally</h2>
+    <pre><code># Production
+npm start
+
+# Development (auto-restart on changes)
+npm run dev</code></pre>
+    <p>Then open <code>http://localhost:3000</code> in your browser.</p>
+
+    <h2 id="structure">File structure</h2>
+    <pre><code>neerazhi/
+├── server/
+│   └── index.js          ← Express + WebSocket + MQTT server
+├── public/
+│   ├── index.html         ← Landing page
+│   ├── pages/
+│   │   ├── dashboard.html ← Live dashboard
+│   │   ├── docs.html      ← This page
+│   │   └── about.html     ← About page
+│   ├── css/
+│   │   └── style.css      ← Shared styles
+│   └── js/
+│       └── dashboard.js   ← Dashboard logic
+├── .env.example
+├── package.json
+└── README.md</code></pre>
+
+    <h2 id="server">Backend</h2>
+    <p>The backend (<code>server/index.js</code>) does five things:</p>
+    <ul>
+      <li>Serves static files from <code>public/</code></li>
+      <li>Runs the sensor simulator tick every 2 seconds</li>
+      <li>Connects to an MQTT broker when in real-sensor mode</li>
+      <li>Pushes sensor updates to all connected browsers via WebSocket</li>
+      <li>Proxies requests to the Anthropic Claude API (so your API key stays server-side)</li>
+    </ul>
+
+    <h2 id="ws">WebSocket events</h2>
+    <h3>Server → client</h3>
+    <table>
+      <tr><th>Type</th><th>Payload</th><th>Description</th></tr>
+      <tr><td><code>init</code></td><td><code>{ data, rain, sensorMode }</code></td><td>Full state on first connect</td></tr>
+      <tr><td><code>sensors</code></td><td><code>{ data }</code></td><td>Updated sensor array every tick</td></tr>
+      <tr><td><code>rainStatus</code></td><td><code>{ rain }</code></td><td>Rain toggle confirmed</td></tr>
+      <tr><td><code>modeStatus</code></td><td><code>{ sensorMode }</code></td><td>Mode switch confirmed</td></tr>
+    </table>
+    <h3>Client → server</h3>
+    <table>
+      <tr><th>Type</th><th>Payload</th></tr>
+      <tr><td><code>toggleRain</code></td><td><code>{ value: bool }</code></td></tr>
+      <tr><td><code>setMode</code></td><td><code>{ mode: "sim" | "mqtt" }</code></td></tr>
+    </table>
+
+    <h2 id="api-sensors">GET /api/sensors</h2>
+    <p>Returns the current sensor snapshot without opening a WebSocket.</p>
+    <pre><code>curl http://localhost:3000/api/sensors</code></pre>
+    <pre><code>{
+  "sensors": [
+    { "id": 1, "level": 42, "predicted": 47, "riseRate": 1.2,
+      "blockage": 8, "risk": 24, "status": "warning" },
+    ...
+  ],
+  "rain": false,
+  "sensorMode": "sim"
+}</code></pre>
+
+    <h2 id="api-analyse">POST /api/analyse</h2>
+    <p>Sends sensor data to Claude and returns an AI flood assessment.</p>
+    <pre><code>curl -X POST http://localhost:3000/api/analyse \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sensors": [...],
+    "rain": false,
+    "path": "MH7 → MH8 → MH13",
+    "dnvi": "MH8, MH9, MH13"
+  }'</code></pre>
+    <pre><code>{ "analysis": "Current drainage levels are moderate..." }</code></pre>
+
+    <h2 id="api-history">GET /api/history</h2>
+    <p>Returns the last 20 critical alerts (in-memory, resets on server restart).</p>
+
+    <h2 id="sim">Simulator mode</h2>
+    <p>The default mode. Every 2 seconds, water levels increase randomly when rain is on, and decrease slowly when off. Blockage scores are randomised on startup. No hardware needed.</p>
+
+    <h2 id="mqtt">MQTT real sensors</h2>
+    <p>Switch to "Real MQTT" mode in the dashboard toolbar. The server will connect to the broker defined in <code>.env</code> and subscribe to <code>MQTT_TOPIC</code>.</p>
+    <p>Each sensor node should publish to a topic like <code>neerazhi/sensors/MH1</code>.</p>
+
+    <h2 id="payload">MQTT payload format</h2>
+    <p>Publish JSON with <code>nodeId</code> (1–15) and <code>level</code> (0–100):</p>
+    <pre><code>// Topic: neerazhi/sensors/MH1
+{
+  "nodeId": 1,
+  "level": 54.3
+}</code></pre>
+    <p>The server clamps <code>level</code> to 0–100 and updates that node's entry in the shared state.</p>
+
+    <h2 id="deploy">Deploy to Railway</h2>
+    <pre><code>npm install -g @railway/cli
+railway login
+railway init
+railway up</code></pre>
+    <p>Set <code>ANTHROPIC_API_KEY</code> as an environment variable in the Railway dashboard under Variables.</p>
+
+    <h2 id="vps">VPS with nginx + pm2</h2>
+    <pre><code># Install pm2 and start the app
+npm install -g pm2
+pm2 start server/index.js --name neerazhi
+pm2 save
+
+# nginx config (reverse proxy)
+server {
+    listen 80;
+    server_name yourdomain.com;
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+}</code></pre>
+    <p>The <code>Upgrade</code> and <code>Connection</code> headers are required for WebSocket proxying.</p>
+  </main>
+</div>
+
+<footer>
+  <p>Neerazhi documentation · <a href="/dashboard" style="color:var(--accent)">Open dashboard</a></p>
+</footer>
+</body>
+</html>

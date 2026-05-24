@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Neerazhi</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .about-wrap { max-width: 760px; margin: 0 auto; padding: 3rem 2rem; }
+    .about-wrap h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .about-wrap .subtitle { font-size: 1.1rem; color: var(--muted); margin-bottom: 2.5rem; }
+    .about-wrap h2 { font-size: 1.2rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--accent); }
+    .about-wrap p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 1.5rem 0; }
+    .tech-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+    }
+    .tech-card .name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .tech-card .role { font-size: 12px; color: var(--muted); }
+    .name-meaning {
+      background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(14,165,233,0.08));
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin: 1.5rem 0;
+    }
+    .name-meaning .word { font-size: 2rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+    .name-meaning .meaning { color: var(--muted); font-size: 14px; }
+    .timeline { margin: 1.5rem 0; }
+    .tl-item { display: flex; gap: 16px; margin-bottom: 16px; }
+    .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 5px; flex-shrink: 0; }
+    .tl-item .tl-title { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-item .tl-desc { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Neerazhi</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/docs">Docs</a>
+    <a href="/about" class="active">About</a>
+  </div>
+</nav>
+
+<div class="about-wrap">
+  <div class="name-meaning">
+    <div class="word">நீர் + அழி = Neerazhi</div>
+    <div class="meaning">Tamil · நீர் (neer) = water &nbsp;·&nbsp; அழி (azhi) = wave / destroy &nbsp;·&nbsp; Together: the force that tames water</div>
+  </div>
+
+  <h1>About Neerazhi</h1>
+  <p class="subtitle">AI-powered smart drainage intelligence for urban flood resilience.</p>
+
+  <h2>The problem</h2>
+  <p>Tamil Nadu's cities — Chennai, Coimbatore, Madurai — face repeated urban flooding during the northeast monsoon. Drainage networks get overwhelmed not because of capacity alone, but because of poor real-time visibility. Maintenance teams have no way to see which manholes are filling up, which sections are blocked, or where water should be diverted — until it's already flooding.</p>
+
+  <h2>What Neerazhi does</h2>
+  <p>Neerazhi puts a live intelligence layer on top of the drainage network. Ultrasonic sensors in manholes report water levels every 2 seconds. A graph algorithm continuously computes the safest diversion route. And when operators need situational awareness fast, Claude AI reads all 15 sensors at once and gives a plain-language flood risk assessment with specific recommendations.</p>
+
+  <h2>Technology stack</h2>
+  <div class="tech-grid">
+    <div class="tech-card"><div class="name">Node.js + Express</div><div class="role">Backend server, REST API</div></div>
+    <div class="tech-card"><div class="name">WebSocket (ws)</div><div class="role">Real-time sensor push</div></div>
+    <div class="tech-card"><div class="name">MQTT</div><div class="role">IoT sensor protocol</div></div>
+    <div class="tech-card"><div class="name">Canvas 2D API</div><div class="role">Network visualisation</div></div>
+    <div class="tech-card"><div class="name">Chart.js</div><div class="role">Level history graph</div></div>
+    <div class="tech-card"><div class="name">Dijkstra's algorithm</div><div class="role">Safe path routing</div></div>
+    <div class="tech-card"><div class="name">Claude (Anthropic)</div><div class="role">AI flood assessment</div></div>
+    <div class="tech-card"><div class="name">Vanilla JS + HTML</div><div class="role">Zero-framework frontend</div></div>
+  </div>
+
+  <h2>Why real AI, not fake AI</h2>
+  <p>Most "AI dashboards" you'll find online use weighted formulas and call them AI. Neerazhi does that too for the fast, deterministic parts — risk scores, Dijkstra routing, DNVI calculations. But when it comes to synthesising 15 sensors into a human-readable assessment that accounts for context (rain status, diversion path, vulnerable nodes, local geography), that's genuinely where a language model adds value that a formula can't.</p>
+  <p>The Claude API receives the full sensor snapshot and returns analysis written by an actual language model — not a template with numbers plugged in.</p>
+
+  <h2>Sensor hardware mapping</h2>
+  <p>The 15 manhole nodes (MH1–MH15) are laid out in a 3×5 grid topology. Each node represents one physical manhole sensor. In real deployments, sensors publish to MQTT topics like <code>neerazhi/sensors/MH1</code> with a JSON payload containing the water level reading.</p>
+  <p>See the <a href="/docs#mqtt" style="color:var(--accent)">MQTT integration docs</a> for the exact payload format and topic structure.</p>
+
+  <h2>Roadmap</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">✅ Core dashboard</div><div class="tl-desc">Live canvas map, Dijkstra routing, AI analysis, WebSocket push, sim + MQTT modes</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">🔜 Persistent alerts DB</div><div class="tl-desc">SQLite store so alert history survives server restarts</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">🔜 SMS / WhatsApp alerts</div><div class="tl-desc">Twilio integration to notify field teams when nodes go critical</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">🔜 Map overlay</div><div class="tl-desc">Leaflet.js layer showing sensor positions on a real street map</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">🔜 Multi-city support</div><div class="tl-desc">Support multiple drainage zones with per-zone dashboards</div></div></div>
+  </div>
+</div>
+
+<footer>
+  <p>Neerazhi · Built for Tamil Nadu's urban drainage network · <a href="/dashboard" style="color:var(--accent)">Open dashboard</a></p>
+</footer>
+</body>
+</html>

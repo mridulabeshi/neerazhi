@@ -1,0 +1,21 @@
+{
+  "name": "neerazhi",
+  "version": "1.0.0",
+  "description": "AI Smart Drainage Intelligence System",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0",
+    "mqtt": "^5.3.4",
+    "dotenv": "^16.4.1",
+    "cors": "^2.8.5",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

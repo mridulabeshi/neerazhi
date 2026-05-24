@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neerazhi — AI Smart Drainage Intelligence</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .hero {
+      min-height: calc(100vh - 56px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(34,211,238,0.08);
+      border: 1px solid rgba(34,211,238,0.2);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(34,211,238,0.3); }
+    .feat-icon {
+      width: 40px; height: 40px;
+      background: rgba(34,211,238,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .stat-item .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .how-section { max-width: 900px; margin: 4rem auto; padding: 0 2rem; }
+    .how-section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; text-align: center; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .step {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      background: var(--accent2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .step h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .step p { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Neerazhi</a>
+  <div class="nav-links">
+    <a href="/" class="active">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/docs">Docs</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">⚡ Powered by Claude AI</div>
+  <h1>Smart drainage<br>intelligence for<br><span>Tamil Nadu cities</span></h1>
+  <p>Real-time flood risk monitoring with AI-powered analysis. Predict blockages, route water flows, and get actionable alerts before flooding occurs.</p>
+  <div class="hero-btns">
+    <a href="/dashboard" class="btn btn-primary">Open live dashboard →</a>
+    <a href="/docs" class="btn btn-outline">Read the docs</a>
+  </div>
+</section>
+
+<div class="stats-row">
+  <div class="stat-item"><div class="num">15</div><div class="label">Monitored manholes</div></div>
+  <div class="stat-item"><div class="num">2s</div><div class="label">Update interval</div></div>
+  <div class="stat-item"><div class="num">AI</div><div class="label">Claude-powered analysis</div></div>
+  <div class="stat-item"><div class="num">MQTT</div><div class="label">Real sensor ready</div></div>
+</div>
+
+<div class="features">
+  <div class="feature-card">
+    <div class="feat-icon">🗺</div>
+    <h3>Live network map</h3>
+    <p>Colour-coded drainage network showing water levels, rise rates, and predicted flood zones updated every 2 seconds.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feat-icon">🤖</div>
+    <h3>AI flood assessment</h3>
+    <p>Claude analyses real sensor data and generates a practical, localised flood risk assessment with actionable recommendations.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feat-icon">🔀</div>
+    <h3>Optimal path routing</h3>
+    <p>Dijkstra's algorithm computes the safest diversion path through the network, avoiding critical nodes in real time.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feat-icon">📡</div>
+    <h3>Sim + real sensor modes</h3>
+    <p>Toggle between simulation mode for demos and live MQTT sensor mode for real IoT hardware deployments.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feat-icon">⚠️</div>
+    <h3>DNVI critical nodes</h3>
+    <p>Drainage Network Vulnerability Index identifies the highest-risk nodes based on water level, rise rate, and connectivity.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feat-icon">📊</div>
+    <h3>Historical alerts</h3>
+    <p>Every critical event is logged with timestamp, node ID, and water level so you can review past incidents.</p>
+  </div>
+</div>
+
+<section class="how-section">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h4>Sensors collect data</h4><p>Ultrasonic water-level sensors in manholes send readings via MQTT every 2 seconds.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Server processes</h4><p>Node.js backend calculates risk scores, runs path-finding, and pushes updates via WebSocket.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Dashboard renders</h4><p>Canvas-based network map renders colour-coded nodes and the optimal diversion path in real time.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Claude analyses</h4><p>On demand, the Anthropic API receives a full sensor snapshot and returns a practical flood assessment.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Neerazhi — Built for urban flood resilience · <a href="/dashboard" style="color:var(--accent)">Open dashboard</a></p>
+</footer>
+</body>
+</html>
